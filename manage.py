@@ -2,10 +2,15 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from pathlib import Path
 
 
 def main():
     """Run administrative tasks."""
+    env_path = Path(__file__).resolve().parent / '.env'
+    if env_path.exists():
+        from dotenv import load_dotenv
+        load_dotenv(env_path)
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mychat.settings')
     try:
         from django.core.management import execute_from_command_line

@@ -1,4 +1,4 @@
-const APP_ID = 'REDACTED_APP_ID_2'
+const APP_ID = window.AGORA_APP_ID
 const CHANNEL = sessionStorage.getItem('room')
 const TOKEN = sessionStorage.getItem('token')
 let UID = Number(sessionStorage.getItem('UID'))
