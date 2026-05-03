@@ -4,37 +4,38 @@
 
 <main>
     <section id="form-container">
-        <img id="logo" src="{% static 'images/icon.jpg' %}" />
+        <div id="logo-wrapper">
+            <img id="logo" src="{% static 'images/icon.jpg' %}" />
+        </div>
 
         <div id="welcome-message">
-            <h1>Welcome to MyChat</h1>
-            <p>A group video calling application for you!</p>
+            <h1>MyChat</h1>
+            <p>Join a video room instantly</p>
         </div>
-        <form id="form" class="happy-monkey-regular">
+        <form id="form">
                 <div class="form-field">
-                    <input type="text" name="room" placeholder="Enter a room name..." style="text-transform: uppercase" />
-
-                </div>
-                 <div class="form-field">
-                    <input type="text" name="username" placeholder="Enter your name..." style="text-transform: uppercase" />
-
+                    <label>Room Name</label>
+                    <input type="text" name="room" placeholder="e.g. DEVTEAM" style="text-transform: uppercase" required />
                 </div>
                 <div class="form-field">
-                    <input type="submit" value="Join Stream" />
-
+                    <label>Your Name</label>
+                    <input type="text" name="username" placeholder="e.g. Alice" required />
+                </div>
+                <div class="form-field">
+                    <input type="submit" value="Join Room" />
                 </div>
         </form>
-    </section>   
-
-
-
+    </section>
 </main>
 
 <script type="text/javascript">
     let form = document.getElementById('form')
     let handleSubmit = async (e) => {
         e.preventDefault()
-        let room = e.target.room.value.toUpperCase()
+        let room = e.target.room.value.toUpperCase().trim()
+        let username = e.target.username.value.trim()
+
+        if (!room || !username) return
 
         let response = await fetch(`/get_token/?channel=${room}`)
         let data = await response.json()
@@ -44,6 +45,7 @@
         sessionStorage.setItem('UID', UID)
         sessionStorage.setItem('token', token)
         sessionStorage.setItem('room', room)
+        sessionStorage.setItem('username', username)
         window.open('/room/', '_self')
     }
 
