@@ -1,1 +1,21 @@
+# Virtual environment
 venv/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Django
+db.sqlite3
+*.log
+
+# Static collected
+staticfiles/
+
+# Environment
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db
